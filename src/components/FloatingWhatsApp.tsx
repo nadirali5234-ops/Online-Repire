@@ -50,6 +50,7 @@ export const FloatingWhatsApp: React.FC = () => {
   const [isTyping, setIsTyping] = useState(false);
   
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const previewRef = useRef<HTMLDivElement>(null);
 
   const initialGreeting: ChatMessage = {
     id: 'msg-1',
@@ -71,6 +72,12 @@ export const FloatingWhatsApp: React.FC = () => {
       messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
     }
   }, [messages, isOpen, isTyping]);
+
+  useEffect(() => {
+    if (activeTab === 'generator' && previewRef.current) {
+      previewRef.current.scrollTop = previewRef.current.scrollHeight;
+    }
+  }, [genName, genPhone, genServiceId, genAddress, genNote, activeTab]);
 
   const handleSendUserMessage = (textToSend?: string) => {
     const text = textToSend || inputText.trim();
@@ -533,7 +540,7 @@ Hours: 24/7 Emergency Dispatch Available!`;
                   </button>
                 </div>
 
-                <div className="p-3 bg-slate-950 border border-slate-800 rounded-xl text-[11px] font-mono text-slate-300 whitespace-pre-wrap leading-relaxed max-h-32 overflow-y-auto">
+                <div ref={previewRef} className="p-3 bg-slate-950 border border-slate-800 rounded-xl text-[11px] font-mono text-slate-300 whitespace-pre-wrap leading-relaxed max-h-32 overflow-y-auto scroll-smooth">
                   {decodeURIComponent(getGeneratedWhatsAppText()).replace(/%0A/g, '\n')}
                 </div>
               </div>
