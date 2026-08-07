@@ -1,0 +1,6 @@
+{
+  "name": "Sayad Handyman",
+  "description": "Professional home and technical repair services including appliance repair, aircond service, plumbing, computer repair, awning, and waterproofing.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
